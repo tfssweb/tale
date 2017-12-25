@@ -27,6 +27,9 @@
 ![007](https://raw.githubusercontent.com/tfssweb/tfssweb.github.io/master/source/images/blog/007.png)
 
 ## 如何使用
+直接`Fork`到自己的GitHub使用（不要吝啬你的`Star`哦！）；
+
+或者
 
 将代码克隆到本地，执行：
 ```
