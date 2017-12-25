@@ -1,0 +1,19 @@
+version: '2'
+services:
+    blog:
+        container_name: blog
+        image: "blog_${BLOG_VERSION}"
+        build:
+            context: .
+            dockerfile: Dockerfile.blog
+        environment:
+            TZ: 'Asia/Shanghai'
+        ports:
+            - "9000:9000"
+        volumes:
+            - /opt/tfss_volumes/tale.db:/tale/resources/tale.db
+            - /opt/tfss_volumes/upload:/tale/resources/upload
+        restart: always
+
+        #volumes:
+        #   blog-db:

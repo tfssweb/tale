@@ -1,0 +1,44 @@
+#include('./partial/header.html',{home_page:1})
+<div class="main-content index-page clearfix">
+    <div class="post-lists">
+        <div class="post-lists-body">
+<!--         	设置每页展示文章数 -->
+            #for(article : articles(9).rows)
+            <div class="post-list-item">
+                <div class="post-list-item-container">
+                    <div class="item-thumb bg-deepgrey" style="background-image:url(${show_thumb(article)});"></div>
+                    <a href="${permalink()}">
+                        <div class="item-desc">
+<!--                         获取文章摘要字数 -->
+                            <p>${intro(75)}...</p>
+                        </div>
+                    </a>
+                    <div class="item-slant reverse-slant bg-deepgrey"></div>
+                    <div class="item-slant"></div>
+                    <div class="item-label">
+                        <div class="item-title"><a href="${permalink()}">${title()}</a>
+                        </div>
+                        
+                        <div class="item-meta clearfix">
+                            <div class="item-meta-ico ${show_icon()}"
+                                 style="background: url(/templates/themes/default/static/img/bg-ico.png) no-repeat;background-size: 40px auto;"></div>
+
+<!--                              源代码 -->
+<!--                             <div class="item-meta-cat"> -->
+<!--                            		${show_categories()} -->
+<!--                             </div> -->
+                            <div style="font-size:13px;position:relative;float:right;margin-right:10px;padding:10px 0;text-align:right;text-transform:none;color:#5f5f5f;">
+                           		${modified('yyyy-MM-dd HH:mm')}&nbsp;&nbsp;${show_categories()}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            #end
+        </div>
+    </div>
+    <div class="lists-navigator clearfix">
+        #call pageNav(articles(9),'←','→','page')
+    </div>
+</div>
+#include('./partial/footer.html')
