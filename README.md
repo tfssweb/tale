@@ -38,11 +38,12 @@ cp -r ./tfss_volumes/ /opt/
 
 docker-compose up -d
 ```
+（注意以此方式部署你得需要docker环境）
 即可！
 
 ## 开源协议
 
-本代码以[王爵GitHub](https://github.com/otale/tale)代码未基础作为二次开发，现主要关注于博客的Docker部署、前端界面优化以及插件的开发，所以有志同道合的朋友可以加QQ群（247158514）一起探讨！
+本代码以[biezhi](https://github.com/otale/tale)代码为基础作为二次开发，现主要关注于博客的Docker部署、前端界面优化以及插件的开发，所以有志同道合的朋友可以加QQ群（247158514）一起探讨！
 
 [MIT](LICENSE)
 
@@ -52,7 +53,7 @@ docker-compose up -d
 											——牛顿 
 再次感谢为开源而努力的朋友！！
 
-+ [王爵](https://github.com/otale/tale)
++ [biezhi](https://github.com/otale/tale)
 
 
 
