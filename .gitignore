@@ -14,4 +14,4 @@ target/
 logs/
 
 # database file #
-tale.db
+# tale.db
