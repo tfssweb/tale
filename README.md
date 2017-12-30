@@ -44,7 +44,7 @@ docker-compose up -d
 （注意以此方式部署你得需要docker环境）
 即可！
 
-有开发/部署问题的可以进<b style="color:red;">QQ群（247158514）</b>,之后的教程录像也会上传到群文件中！
+有开发/部署问题的可以进<span style="color:red;">QQ群（247158514）</span>,之后的教程录像也会上传到群文件中！
 ## 视频教程目录
 001、Docker环境下部署博客教程录像<br/>
 待续...
@@ -53,7 +53,7 @@ docker-compose up -d
 
 本代码以[biezhi](https://github.com/otale/tale)代码为基础作为二次开发，现主要关注于博客的Docker部署、前端界面优化以及插件的开发，所以有志同道合的朋友可以一起探讨！
 
-<b style="color:red;">QQ群（247158514）</b>
+<span style="color:red;">QQ群（247158514）</span>
 
 [MIT](LICENSE)
 
