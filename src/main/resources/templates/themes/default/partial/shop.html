@@ -1,0 +1,51 @@
+<head>
+<style>
+@charset "utf-8";
+body, ul, dl, dd, dt, ol, li, p, h1, h2, h3, h4, h5, h6, textarea, form, select, fieldset, table, td, div, input{margin:0;padding:0;-webkit-text-size-adjust:none}
+h1, h2, h3, h4, h5, h6{font-size:12px;font-weight:normal}
+a img{border:0}
+body{color:#333;text-align:center;font:12px "瀹嬩綋";}
+ul, ol, li{list-style-type:none;vertical-align:0}
+a{outline-style:none;color:#535353;text-decoration:none}
+a:hover{color:#D40000;text-decoration:none}
+
+/* servicesBox *//* 整个布局 */
+.servicesBox{width:900px;height:270px;margin:0 230px;;clear:both;line-height:18px;color:#999999;font-size:12px;}/* 单个框设置 */
+.servicesBox .serBox{border-radius:25px;margin:0 13px;cursor:pointer;border:1px solid #fff;display:inline;width:198px;height:270px;float:left;overflow:hidden;background-color:#f7f7f7;position:relative;}
+.servicesBox .serBoxOn{font-family:"微软雅黑";display:none;width:320px;height:270px;background:#090;position:absolute;left:0px;top:0px;z-index:19;}
+.servicesBox .serBox .pic1{width:110px;height:110px;text-align:center;position:absolute;top:22px;right:41px;z-index:99;}
+.servicesBox .serBox .pic2{width:110px;height:110px;text-align:center;position:absolute;top:22px;left:-110px;z-index:99;}
+.servicesBox .serBox .txt1{width:198px;height:100px;color:#999999;position:absolute;top:145px;left:0px;z-index:99;}
+.servicesBox .serBox .txt2{width:198px;height:100px;color:#a9cf4f;position:absolute;top:145px;right:-240px;z-index:99;}
+.servicesBox .serBox span.tit{font-size:16px;display:block;text-align:center;}
+.servicesBox .serBox .txt1 .tit{color:#000000;line-height:30px;}
+.servicesBox .serBox .txt2 .tit{color:#fff;line-height:30px;font-family:"微软雅黑";}
+.servicesBox .serBox p{padding:0 10px;text-align:center;}
+</style>
+</head>
+<body><div class="servicesBox">
+	<div class="serBox">		<div class="serBoxOn"></div>		<div class="pic1"> <img src="${theme_url('/static/images/3.png')}"> </div>		<div class="pic2"> <img src="${theme_url('/static/images/3-3.png')}"> </div>		<div class="txt1"> <span class="tit">开心网</span><p>开心网营销</p></div>		<div class="txt2"><a href="http://www.tfssweb.com/forum.php?mod=viewthread&tid=173" target="_blank" class="a_jump"><span class="tit">开心网</span><p>开心网营销</p></a></div>	</div>
+	<div class="serBox">		<div class="serBoxOn"></div>		<div class="pic1"> <img src="${theme_url('/static/images/1.png')}"> </div>		<div class="pic2"> <img src="${theme_url('/static/images/1-1.png')}"> </div>		<div class="txt1"> <span class="tit">人人网</span><p>人人网营销</p></div>		<div class="txt2"> <a href="http://www.tfssweb.com/forum.php?mod=viewthread&tid=173" target="_blank" class="a_jump"><span class="tit">人人网</span><p>人人网营销</p></a> </div>	</div>
+	<div class="serBox">		<div class="serBoxOn"></div>		<div class="pic1"> <img src="${theme_url('/static/images/2.png')}"> </div>		<div class="pic2"> <img src="${theme_url('/static/images/2-2.png')}"> </div>		<div class="txt1"> <span class="tit">QQ空间</span><p>QQ空间营销</p></div>		<div class="txt2"> <a href="http://www.tfssweb.com/forum.php?mod=viewthread&tid=173" target="_blank" class="a_jump"><span class="tit">QQ空间</span><p>QQ空间营销</p></a> </div>	</div>
+	<div class="serBox">		<div class="serBoxOn"></div>		<div class="pic1"> <img src="${theme_url('/static/images/35.png')}"> </div>		<div class="pic2"> <img src="${theme_url('/static/images/35.png')}"> </div>		<div class="txt1"> <span class="tit">问答营销</span><p>问答投放 锁住潜在客户</p></div>		<div class="txt2"> <a href="http://www.tfssweb.com/forum.php?mod=viewthread&tid=173" target="_blank" class="a_jump"><span class="tit">问答营销</span><p>问答投放 锁住潜在客户</p></a> </div>	</div>
+</div>
+
+<script type="text/javascript">
+$(".serBox").hover(function () {
+	 $(this).children().stop(false,true);
+	 $(this).children(".serBoxOn").fadeIn("slow");
+     $(this).children(".pic1").animate({right: -110},400);
+     $(this).children(".pic2").animate({left: 41},400);
+     $(this).children(".txt1").animate({left: -240},400);
+     $(this).children(".txt2").animate({right: 0},400);	
+},function () {
+	 $(this).children().stop(false,true);
+	 $(this).children(".serBoxOn").fadeOut("slow");
+	 $(this).children(".pic1").animate({right:41},400);
+     $(this).children(".pic2").animate({left: -110},400);
+     $(this).children(".txt1").animate({left: 0},400);
+     $(this).children(".txt2").animate({right: -240},400);	
+});
+</script>
+
+</body>
