@@ -52,15 +52,18 @@ docker-compose up -d
 
 ## 近期提交
 
-<p>2017-12-31</p>
-
-- 优化归档显示；<br/>
-- 更换20张缩略图；<br/>
 
 <p>2018-01-05</p>
 
 - 添加商城模块（默认是关闭的，需要二次开发的可以在/tale/src/main/resources/templates/themes/default/partial/footer.html 放开相关代码）
 ![008](https://raw.githubusercontent.com/tfssweb/tfssweb.github.io/master/source/images/blog/008.png)
+
+<p>2017-12-31</p>
+
+- 优化归档显示；<br/>
+- 更换20张缩略图；<br/>
+
+
 ## 开源协议
 
 本代码以[biezhi](https://github.com/otale/tale)代码为基础作为二次开发，现主要关注于博客的Docker部署、前端界面优化以及插件的开发，所以有志同道合的朋友可以一起探讨！
