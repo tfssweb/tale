@@ -195,5 +195,276 @@
     });
     InstantClick.init('mousedown');
 </script>
+<!-- QQ小客服 -->
+<style>
+    .animated {
+        -webkit-animation-duration: .5s;
+        animation-duration: .5s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both
+    }
+    
+    .livechat-girl {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        position: fixed;
+        top: 80%;
+        right: 40px;
+        opacity: 0;
+        -webkit-box-shadow: 0 5px 10px 0 rgba(35, 50, 56, 0.3);
+        box-shadow: 0 5px 10px 0 rgba(35, 50, 56, 0.3);
+        z-index: 700;
+        transform: translateY(0);
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        cursor: pointer;
+        -webkit-transition: all 1s cubic-bezier(0.86, 0, 0.07, 1);
+        transition: all 1s cubic-bezier(0.86, 0, 0.07, 1)
+    }
+    
+    .livechat-girl:focus {
+        outline: 0
+    }
+    
+    .livechat-girl.animated {
+        opacity: 1;
+        transform: translateY(-40px);
+        -webkit-transform: translateY(-40px);
+        -ms-transform: translateY(-40px)
+    }
+    
+    .livechat-girl:after {
+        content: '';
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-image: linear-gradient(to bottom, #38dc79, #1ab744);
+        position: absolute;
+        right: 1px;
+        top: 1px;
+        z-index: 50
+    }
+    
+    .livechat-girl .girl {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        z-index: 50;
+        border-radius: 100%
+    }
+    
+    .livechat-girl .animated-circles .circle {
+        background: rgba(26, 183, 68, 0.25);
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        position: absolute;
+        z-index: 49;
+        transform: scale(1);
+        -webkit-transform: scale(1)
+    }
+    
+    .livechat-girl .animated-circles.animated .c-1 {
+        animation: 2000ms scaleToggleOne cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards
+    }
+    
+    .livechat-girl .animated-circles.animated .c-2 {
+        animation: 2500ms scaleToggleTwo cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards
+    }
+    
+    .livechat-girl .animated-circles.animated .c-3 {
+        animation: 3000ms scaleToggleThree cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards
+    }
+    
+    .livechat-girl.animation-stopped .circle {
+        opacity: 0 !important
+    }
+    
+    .livechat-girl .livechat-hint {
+        position: absolute;
+        right: 40px;
+        top: 50%;
+        margin-top: -20px;
+        opacity: 0;
+        z-index: 0;
+        -webkit-transition: all 0.3s cubic-bezier(0.86, 0, 0.07, 1);
+        transition: all 0.3s cubic-bezier(0.86, 0, 0.07, 1);
+        background-color: #1ab744
+    }
+    
+    .livechat-girl .livechat-hint.show_hint {
+        -webkit-transform: translateX(-40px);
+        transform: translateX(-40px);
+        opacity: 1
+    }
+    
+    .livechat-girl .livechat-hint.hide_hint {
+        opacity: 0;
+        -webkit-transform: translateX(0);
+        transform: translateX(0)
+    }
+    
+    .rd-notice-tooltip {
+        -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+        font-size: 14px;
+        border-radius: 3px;
+        line-height: 1.25;
+        position: absolute;
+        z-index: 65;
+        max-width: 350px
+    }
+    
+    .rd-notice-tooltip.thumb-heart-tooltip {
+        z-index: 100;
+        margin-top: 19px
+    }
+    
+    .rd-notice-tooltip.thumb-heart-tooltip .rd-notice-content {
+        padding: 10px 20px
+    }
+    
+    .rd-notice-tooltip:after {
+        position: absolute;
+        display: block;
+        content: '';
+        height: 20px;
+        width: 20px;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        z-index: 50;
+        top: 10px;
+        right: -6px;
+        background-color: #1ab744
+    }
+    
+    .rd-notice-tooltip .rd-notice-content {
+        background: 0;
+        border-radius: 3px;
+        width: 100%;
+        color: #fff;
+        position: relative;
+        z-index: 60;
+        padding: 20px;
+        font-weight: 400;
+        line-height: 1.45
+    }
+    
+    .rd-notice-tooltip .rd-notice-content a {
+        color: #fff;
+        text-decoration: underline
+    }
+    
+    .rd-notice-tooltip .arrow {
+        display: none !important
+    }
+    
+    .rd-notice-tooltip.alert.rd-closing {
+        white-space: normal;
+        text-align: left
+    }
+    
+    .rd-notice-tooltip.alert.rd-closing .rd-notice-content {
+        padding-right: 50px
+    }
+    
+    .rd-notice-tooltip.single-line .rd-notice-content {
+        height: 40px;
+        padding: 0 20px;
+        line-height: 40px;
+        white-space: nowrap
+    }
+    
+    @keyframes scaleToggleOne {
+        from {
+            transform: scale(1);
+            -webkit-transform: scale(1)
+        }
+        50% {
+            transform: scale(2);
+            -webkit-transform: scale(2)
+        }
+        100% {
+            transform: scale(1);
+            -webkit-transform: scale(1)
+        }
+    }
+    
+    @keyframes scaleToggleTwo {
+        0% {
+            transform: scale(1);
+            -webkit-transform: scale(1)
+        }
+        20% {
+            transform: scale(1);
+            -webkit-transform: scale(1)
+        }
+        60% {
+            transform: scale(2);
+            -webkit-transform: scale(2)
+        }
+        100% {
+            transform: scale(1);
+            -webkit-transform: scale(1)
+        }
+    }
+    
+    @keyframes scaleToggleThree {
+        0% {
+            transform: scale(1);
+            -webkit-transform: scale(1)
+        }
+        33% {
+            transform: scale(1);
+            -webkit-transform: scale(1)
+        }
+        66% {
+            transform: scale(2);
+            -webkit-transform: scale(2)
+        }
+        100% {
+            transform: scale(1);
+            -webkit-transform: scale(1)
+        }
+    }
+</style>
+<a class="livechat-girl js-livechat-girl animated" id="lc-girl-block-en_2" href="http://wpa.qq.com/msgrd?v=3&amp;uin=1255791430&amp;site=qq&amp;menu=yes" target="_blank"><img class="girl" border="0" src="${theme_url('/static/images/qq.png')}" alt="点击这里给我发消息" title="点击这里给我发消息">
+    <div class="js-livechat-hint livechat-hint rd-notice rd-notice-tooltip single-line hide_hint">
+        <div class="popover-content rd-notice-content">嘿！有什么可以帮助你吗？</div>
+    </div>
+    <div class="animated-circles js-animated-circles animated">
+        <div class="circle c-1"></div>
+        <div class="circle c-2"></div>
+        <div class="circle c-3"></div>
+    </div>
+</a>
+<script type='text/javascript' src='../jquery-3.2.1.min.js'></script>
+<script>
+    jQuery(function() {
+        setInterval(function() {
+            jQuery('.js-animated-circles').toggleClass('animated');
+        }, 4000);
+
+        jQuery('#lc-girl-block-en_2').on({
+            'mouseover': function() {
+                jQuery(this).find('.js-livechat-hint').removeClass('hide_hint').addClass('show_hint');
+            },
+            'mouseleave': function() {
+                jQuery(this).find('.js-livechat-hint').removeClass('show_hint').addClass('hide_hint');
+            }
+        })
+    });
+</script>
 </body>
 </html>
