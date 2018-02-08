@@ -1,0 +1,147 @@
+#include('./partial/header.html',{title: article.title, keywords: article.tags})
+<!-- content -->
+<div id="content" class="app-content markdown-body">
+    <div id="loadingbar" class="butterbar hide">
+        <span class="bar"></span>
+    </div>
+    <a class="off-screen-toggle hide"></a>
+    <main class="app-content-body">
+        <div class="hbox hbox-auto-xs hbox-auto-sm">
+            <!--文章-->
+            <div class="col">
+                <!--标题下的一排功能信息图标：作者/时间/浏览次数/评论数/分类-->
+                <header id="small_widgets" class="bg-light lter b-b wrapper-md">
+                    <h1 class="entry-title m-n font-thin h3 text-black l-h">${title()}</h1>
+                    <!--文章标题下面的小部件-->
+                    <ul class="entry-meta text-muted list-inline m-b-none small">
+                        <!--发布时间-->
+                        <li class="meta-date"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;
+                            <span class="sr-only">发布时间：</span>
+                            <time class="meta-value">${created('yyyy-MM-dd')}</time>
+                        </li>
+                        <!--浏览数-->
+                        <li class="meta-views">
+                            <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;
+                            <span class="meta-value">${hits()}&nbsp;次浏览</span>
+                        </li>
+                        <!--评论数-->
+                        <li class="meta-comments">
+                            <i class="fa fa-comments" aria-hidden="true"></i>&nbsp;
+                            <a class="meta-value" href="#comments">&nbsp;${comments_num('没有评论', '%d 条评论')}</a>
+                        </li>
+                        <!--分类-->
+                        <li class="meta-categories">
+                            <i class="fa fa-tags" aria-hidden="true"></i>
+                            <span class="sr-only">分类：</span>
+                            <span class="meta-value">${show_categories()}</span>
+                        </li>
+                        <!--分享-->
+                        <li class="meta-copyright">
+                            分享：
+                            <style>
+                                i.iconfont.icon-qzone:after {
+                                    padding: 0 0px 0 5px;
+                                    color: #ccc;
+                                    content: "/\00a0";
+                                }
+                            </style>
+                            <a href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=${site_url('/article/')}${article.cid}&title=${title()}&site=${site_url()}"
+                               itemprop="breadcrumb" target="_blank" title="" data-toggle="tooltip"
+                               data-original-title="分享到QQ空间">
+                                <i style="font-size:15px;" class="iconfont icon-qzone" aria-hidden="true"></i>
+                            </a>
+                            <a href="http://service.weibo.com/share/share.php?url=${site_url('/article/')}${article.cid}&title=${title()}"
+                               target="_blank" itemprop="breadcrumb" title="" data-toggle="tooltip"
+                               data-original-title="分享到微博">
+                                <i style="font-size:15px;" class="fa fa-weibo" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </header>
+                <div class="wrapper-md">
+                    <!--博客文章样式 begin with .blog-post-->
+                    <div id="postpage" class="blog-post">
+                        <article class="panel">
+                            <!--文章内容-->
+                            <div id="post-content" class="wrapper-lg">
+                                <div class="entry-content l-h-2x">
+                                    ${show_content()}
+                                </div>
+                                <!--文章的页脚部件：打赏和其他信息的输出-->
+                                <div class="show-foot">
+                                    <div class="notebook">
+                                        <i class="fa fa-clock-o"></i>
+                                        <span>最后修改：${modified('yyyy/MM/dd HH:mm')}</span>
+                                    </div>
+                                    <div class="copyright" data-toggle="tooltip" data-html="true" data-original-title="转载请联系作者获得授权，并注明转载地址">
+                                        <span>&copy; 著作权归作者所有</span>
+                                    </div>
+                                </div>
+                                <!--打赏模块-->
+                                <div class="support-author">
+                                    <button data-toggle="modal" data-target="#myModal" class="btn btn-pay btn-danger">
+                                        <i class="fa fa-gratipay" aria-hidden="true"></i>&nbsp;赞赏支持
+                                    </button>
+                                    <div class="mt20 text-center article__reward-info">
+                                        <span class="mr10">如果觉得我的文章对你有用，请随意赞赏</span>
+                                    </div>
+                                </div>
+                                <div id="myModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+                                     aria-labelledby="mySmallModalLabel">
+                                    <div class="modal-dialog modal-sm" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"><span
+                                                        aria-hidden="true">&times;</span><span
+                                                        class="sr-only">Close</span></button>
+                                                <h4 class="modal-title">赞赏作者</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p class="text-center"><strong
+                                                        class="article__reward-text">扫一扫支付</strong></p>
+                                                <div class="tab-content">
+                                                    <img nogallery="" aria-labelledby="alipay-tab"
+                                                         class="pay-img tab-pane fade in active" id="alipay_author"
+                                                         role="tabpanel"
+                                                         src="${theme_url('/static/img/alipay-pay.png')}"/>
+                                                    <img nogallery="" aria-labelledby="wechatpay-tab"
+                                                         class="pay-img tab-pane fade" id="wechatpay_author"
+                                                         role="tabpanel"
+                                                         src="${theme_url('/static/img/wechat-pay.png')}"/>
+                                                </div>
+                                                <div class="article__reward-border mb20 mt10"></div>
+                                                <div class="text-center" role="tablist">
+                                                    <div class="pay-button active" role="presentation">
+                                                        <button href="#alipay_author" id="alipay-tab"
+                                                                aria-controls="alipay_author" role="tab"
+                                                                data-toggle="tab" class="btn m-b-xs btn-info"><i
+                                                                class="iconfont icon-alipay" aria-hidden="true"></i><span>&nbsp;支付宝支付</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="pay-button" role="presentation">
+                                                        <button href="#wechatpay_author" id="wechatpay-tab"
+                                                                aria-controls="wechatpay_author" role="tab"
+                                                                data-toggle="tab" class="btn m-b-xs btn-success"><i
+                                                                class="iconfont icon-wechatpay"
+                                                                aria-hidden="true"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;微信支付&nbsp;&nbsp;&nbsp;</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/文章的页脚部件：打赏和其他信息的输出-->
+                            </div>
+                        </article>
+                    </div>
+                    <!--评论-->
+                    #include('./partial/comments.html')
+                </div>
+            </div>
+            #include('./partial/right.html')
+        </div>
+    </main>
+</div>
+<!-- /content -->
+#include('./partial/footer.html')

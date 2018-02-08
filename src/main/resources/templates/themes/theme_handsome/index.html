@@ -1,0 +1,49 @@
+#include('./partial/header.html',{home_page:1})
+<!-- content -->
+<div id="content" class="app-content">
+    <div id="loadingbar" class="butterbar hide">
+        <span class="bar"></span>
+    </div>
+    <a class="off-screen-toggle hide"></a>
+    <main class="app-content-body">
+        <div class="hbox hbox-auto-xs hbox-auto-sm">
+            <div class="col">
+                <div class="wrapper-md">
+                    <!--首页输出文章-->
+                    <div class="blog-post">
+                        #for(article : articles(5).rows)
+                        <div class="panel">
+                            <div id="index-post-img">
+                                <a href="${permalink()}">
+                                    <div class="item-thumb" style="background-image: url('${show_thumb(article)}')"></div>
+                                </a>
+                            </div>
+                            <div class="wrapper-lg">
+                                <h2 class="m-t-none index-post-title">
+                                    <a href="${permalink()}">${title()}</a></h2>
+                                <p class="summary">${intro(66)}...</p>
+                                <div class="line line-lg b-b b-light"></div>
+                                <div class="text-muted">
+                                    <i class="fa fa-clock-o text-muted"></i>&nbsp;${created('yyyy-MM-dd')}
+                                    &nbsp;&nbsp;
+                                    <i class="fa fa-eye text-muted"></i>&nbsp;${hits()} 次浏览
+                                    <a href="${permalink()}#comments" class="m-l-sm">
+                                        <i class="fa fa-comments text-muted"></i>&nbsp;${comments_num('暂无评论', '%s 条评论')}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        #end
+                    </div>
+                    <!--分页首页按钮-->
+                    <nav class="text-center m-t-lg m-b-lg" role="navigation">
+                        #call pageNav(articles(5),'<i class="fa fa-chevron-left"></i>','<i class="fa fa-chevron-right"></i>','page')
+                    </nav>
+                </div>
+            </div>
+            #include('./partial/right.html')
+        </div>
+    </main>
+</div>
+<!-- /content -->
+#include('./partial/footer.html')

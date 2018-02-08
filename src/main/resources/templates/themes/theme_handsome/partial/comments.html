@@ -1,0 +1,108 @@
+#if(null != article)
+<!--导入颜文字支持库-->
+<script src="${theme_url('/static/js/OwO.min.js')}"></script>
+<!--Ajax 提交评论-->
+<script src="${theme_url('/static/js/ajax_comments.min.js')}"></script>
+<div id="comments">
+    #set(comments = comments(6))
+    #if(!is_empty(comments))
+    <h4 class="comments-title m-t-lg m-b">${comments_num('没有评论', '%d 条评论')}</h4>
+    <!--评论列表-->
+    <ol class="comment-list">
+        #for(comment : comments.rows)
+        <li data-no-instant="" id="li-comment-${comment.coid}" class="comment-body comment-parent comment-odd">
+            <div id="div-comment-${comment.coid}" class="comment-body">
+                <a class="pull-left thumb-sm">
+                    <img nogallery="" src="${gravatar(comment.mail)}?s=80&r=G&d=" class="avatar-40 photo img-circle" style="height:40px!important; width: 40px!important;">
+                </a>
+                <div class="m-b m-l-xxl">
+                    <!--评论内容-->
+                    <div class="comment-meta">
+                        <span class="comment-author vcard">
+                            <b class="fn"><a href="javascript:void(0)" target="_blank" rel="external nofollow">${comment.author}</a></b>
+                            #if (login_user != null)
+                            #if(comment.author_id == login_user.uid)<label class="label bg-dark m-l-xs">作者</label>#end
+                            #end
+                        </span>
+                        <div class="comment-metadata">
+                            <time class="format_time text-muted text-xs block m-t-xs" pubdate="pubdate">${fmtdate(comment.created)}</time>
+                        </div>
+                    </div>
+                    <div class="comment-content m-t-sm">
+                        <span class="comment-author-at"></span>
+                        <span class="comment-content-true">
+                            <p>${article(comment.content)}</p>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </li>
+        #end
+    </ol>
+    <!--评论分页开始-->
+    <nav class="text-center m-t-lg m-b-lg" role="navigation">
+        <ol class="page-navigator">
+            #if(comments.hasPrevPage)
+            <li class="prev"><a href="?cp=${comments.prevPage}#comments"><i class="fa fa-chevron-left"></i></a></li>
+            #end
+            #for(navIndex : comments.navPageNums)
+            <li #if(comments.pageNum== navIndex) class="current" #end><a href="?cp=${navIndex}#comments">${navIndex}</a></li>
+            #end
+            #if(comments.hasNextPage)
+            <li class="next"><a href="?cp=${comments.nextPage}#comments"><i class="fa fa-chevron-right"></i></a></li>
+            #end
+        </ol>
+    </nav>
+    <!--评论分页结束-->
+    #end
+
+    #if(article.allowComment)
+    <!--如果允许评论，会出现评论框和个人信息的填写-->
+    <div id="respond-post-${article.cid}" class="respond comment-respond">
+        <h4 id="reply-title" class="comment-reply-title m-t-lg m-b">发表评论</h4>
+        <form id="comment-form" method="post" class="comment-form" role="form" onsubmit="return ajaxc('${site_url()}/comment');">
+            <div class="comment-form-comment form-group">
+                <label for="comment">评论<span class="required text-danger">*</span></label>
+                <textarea id="comment" name="text" class="textarea form-control OwO-textarea" placeholder="基佬，留下你的评论." required rows="5"></textarea>
+                <div class="OwO">颜文字</div>
+            </div>
+            <!--判断是否登录-->
+            <div id="author_info" class="row row-sm">
+                <div class="comment-form-author form-group col-sm-6 col-md-4">
+                    <label for="author">名称<span class="required text-danger">*</span></label>
+                    <input id="author" class="form-control" name="author" type="text" value="${login_user.username ?! ''}" maxlength="245" placeholder="姓名或昵称">
+                </div>
+                <div class="comment-form-email form-group col-sm-6 col-md-4">
+                    <label for="mail">邮箱<span class="required text-danger">*</span></label>
+                    <input type="text" name="mail" id="mail" class="form-control" placeholder="邮箱 (必填,将保密)" value="${login_user.email ?! ''}">
+                </div>
+                <div class="comment-form-url form-group col-sm-12 col-md-4">
+                    <label for="url">地址</label>
+                    <input id="url" class="form-control" name="url" type="url" value="${login_user.home_url ?! ''}" maxlength="200" placeholder="网站或博客">
+                </div>
+            </div>
+            <!--提交按钮-->
+            <div class="form-group">
+                <button type="submit" name="submit" id="submit" class="submit btn btn-success padder-lg">
+                    <span class="text">发表评论</span>
+                    <span class="text-active">提交中...</span>
+                </button>
+
+                <i class="fa-spin fa fa-spinner hide" id="spin"></i>
+                <input type="hidden" name="comment_post_ID" value="448" id="comment_post_ID">
+                <input type="hidden" name="comment_parent" id="comment_parent" value="0">
+                <input type="hidden" name="coid" id="coid"/>
+                <input type="hidden" name="cid" id="cid" value="${article.cid}"/>
+                <input type="hidden" name="_csrf_token" value="${_csrf_token}"/>
+                #if(null != login_user)
+                <input type="hidden" name="authorId" value="${login_user.uid}"/>
+                #end
+            </div>
+        </form>
+    </div>
+    #else
+    <p class="commentClose panel">此处评论已关闭</p>
+    #end
+</div>
+#end
+#include('/comm/tale_comment.html')

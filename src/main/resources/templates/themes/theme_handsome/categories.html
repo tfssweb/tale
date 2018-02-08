@@ -1,0 +1,15 @@
+#tag layout_block("bodyContent")
+<h1 class="text-center">分类</h1>
+<ul class="text-muted top-gap-big">
+    #for(Map.Entry entry : mapping)
+    <li>
+        <a href="${site_url('/category/' + entry.key)}">
+            ${entry.key}
+        </a>
+        <small>(${entry.value.size()})</small>
+    </li>
+    #end
+</ul>
+#end
+
+#include ("./layout.html")

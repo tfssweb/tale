@@ -1,0 +1,115 @@
+<!--文章右侧边栏开始-->
+<aside class="col w-md bg-white-only b-l bg-auto no-border-xs" role="complementary">
+    <div id="sidebar">
+        <section id="tabs-4" class="widget widget_tabs clear">
+            <div class="nav-tabs-alt no-js-hide">
+                <ul class="nav nav-tabs nav-justified" role="tablist">
+                    <li class="active" role="presentation">
+                        <a href="#widget-tabs-4-hots" role="tab" aria-controls="widget-tabs-4-hots"
+                           aria-expanded="true" data-toggle="tab">
+                            <i class="fa fa-fire text-md text-muted wrapper-sm" aria-hidden="true"></i>
+                            <span class="sr-only">热门文章</span>
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#widget-tabs-4-random" role="tab" aria-controls="widget-tabs-4-random"
+                           aria-expanded="true" data-toggle="tab">
+                            <i class="fa fa-random text-md text-muted wrapper-sm" aria-hidden="true"></i>
+                            <span class="sr-only">随机文章</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-content">
+                <!--热门文章-->
+                <div id="widget-tabs-4-hots" class="tab-pane wrapper-md active" role="tabpanel">
+                    <h3 class="widget-title m-t-none text-md">热门文章</h3>
+                    <ul class="list-group no-bg no-borders pull-in m-b-none">
+                        #set(hot_contents = recent_articles(5))
+                        #if(hot_contents != null)
+                        #for(article : hot_contents)
+                        <li class="list-group-item">
+                            <div class="clear">
+                                <h4 class="h5 l-h">
+                                    <a href="${site_url('/article')}/${article.cid}" title="${article.title}">
+                                        ${article.title}
+                                    </a>
+                                </h4>
+                                <small class="text-muted">
+                                    <span class="meta-date m-l-sm">
+                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                        <span class="sr-only">浏览次数:</span>
+                                        <span class="meta-value">${article.hits}</span>
+                                    </span>&nbsp;&nbsp;
+                                    <span class="meta-views">
+                                        <i class="fa fa-comments" aria-hidden="true"></i>
+                                        <span class="sr-only">评论数：</span>
+                                        <span class="meta-value">${article.commentsNum}</span>
+                                    </span>
+                                </small>
+                            </div>
+                        </li>
+                        #end
+                        #end
+                    </ul>
+                </div>
+                <!--随机文章-->
+                <div id="widget-tabs-4-random" class="tab-pane wrapper-md no-js-show" role="tabpanel">
+                    <h3 class="widget-title m-t-none text-md">随机文章</h3>
+                    <ul class="list-group no-borders pull-in auto m-b-none">
+                        #set(rand_articles = recent_articles(5))
+                        #if(rand_articles != null)
+                        #for(article : rand_articles)
+                        <li class="list-group-item">
+                            <div class="clear">
+                                <h4 class="h5 l-h">
+                                    <a href="${site_url('/article')}/${article.cid}" title="${article.title}">
+                                        ${article.title}
+                                    </a>
+                                </h4>
+                                <small class="text-muted">
+                                    <span class="meta-date m-l-sm">
+                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                        <span class="sr-only">浏览次数:</span>
+                                        <span class="meta-value">${article.hits}</span>
+                                    </span>&nbsp;&nbsp;
+                                    <span class="meta-views">
+                                        <i class="fa fa-comments" aria-hidden="true"></i>
+                                        <span class="sr-only">评论数：</span>
+                                        <span class="meta-value">${article.commentsNum}</span>
+                                    </span>
+                                </small>
+                            </div>
+                        </li>
+                        #end
+                        #end
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!--文章目录-->
+        <section id="tag_toc" class="widget widget_categories wrapper-md clear" style="display: none;">
+            <h3 class="widget-title m-t-none text-md">文章目录</h3>
+            <div class="tags l-h-2x">
+                <div id="toc"></div>
+            </div>
+        </section>
+        <!--标签云-->
+        #if(tags != null)
+        <section id="tag_cloud-2" class="widget widget_tag_cloud wrapper-md clear">
+            <h3 class="widget-title m-t-none text-md">标签云</h3>
+            <div class="tags l-h-2x">
+                #for(t : tags)
+                <a href="${site_url('/tag/')}" class="label bg-info" title="${t.name}" data-toggle="tooltip">${t.name}</a>
+                #end
+            </div>
+        </section>
+        <script type="text/javascript">
+            $(".label").each(function () {
+                $(this).attr("href", $(this).attr("href") + $(this).attr("title"));
+            });
+        </script>
+        #end
+    </div>
+</aside>
+<!--文章右侧边栏结束-->
